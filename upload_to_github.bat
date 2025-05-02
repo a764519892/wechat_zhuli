@@ -13,6 +13,6 @@ git commit -m "%msg%"
 
 echo.
 echo === ÍÆËÍµ½ GitHub ===
-git push origin main
+git push origin master
 
 pause
