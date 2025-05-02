@@ -1,0 +1,4 @@
+websockets
+wcferry
+requests
+pywin32

@@ -1,0 +1,32 @@
+wechat_project/
+│
+├── main.py              # 主程序入口
+├── config.py            # 配置文件
+├── requirements.txt     # 依赖库清单
+│
+├── modules/             # 功能模块文件夹
+│   ├── __init__.py      # 标记为 Python 包
+│   ├── websocket/       # WebSocket 相关模块
+│   │   ├── __init__.py
+│   │   └── server.py    # WebSocket 服务器逻辑
+│   ├── message/         # 消息处理相关模块
+│   │   ├── __init__.py
+│   │   └── handler.py   # 消息处理逻辑
+│   ├── features/        # 具体功能模块
+│   │   ├── __init__.py
+│   │   ├── translation.py  # 翻译功能
+│   │   ├── gongyidan.py    # 工艺单功能
+│   │   └── tasks.py        # 任务处理（如每日任务、截图）
+│   └── utils/           # 工具模块
+│       ├── __init__.py
+│       └── tools.py     # 工具函数
+
+优化亮点
+目录更简洁：根目录只保留 main.py、config.py 和 requirements.txt，所有功能模块移入 modules 文件夹。
+层次清晰：modules 下按功能分类（如 websocket、message、features、utils），方便扩展和管理。
+功能不变：仅调整文件位置和导入路径，代码逻辑完全保留。
+可扩展性：新增功能只需在 modules/features/ 下添加新模块，并在 message/handler.py 中注册关键字触发。
+使用方法
+创建上述文件夹结构。
+将代码复制到对应文件。
+在 wechat_project/ 目录下运行 python main.py。
