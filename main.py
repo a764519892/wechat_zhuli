@@ -6,6 +6,7 @@ from modules.websocket.server import start_websocket_server
 from modules.message.handler import start_receiving_messages
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout, Error as PlaywrightError
 from modules.message.types import WxMsg
+import socket
 # 一个简单的消息封装
 
 
@@ -225,12 +226,25 @@ async def monitor_login(ferry: WxFerry):
 
         # 如需检测掉线，可在此加逻辑
         await asyncio.sleep(10)
-
+def get_local_ip():
+    try:
+        # 创建 UDP socket
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # 使用一个不需要真的连接的外部地址（比如 Google 的 DNS）
+        s.connect(("8.8.8.8", 80))
+        local_ip = s.getsockname()[0]
+        s.close()
+        return local_ip
+    except Exception as e:
+        return f"获取失败: {e}"
 async def main():
+    
     ferry = WxFerry()
     await ferry.init()
 
     print("程序启动中…")
+    
+    print("当前本地局域网 IP 地址是：", get_local_ip())
 
     # 启动各项任务
     recv_task = asyncio.create_task(start_receiving_messages(ferry))
